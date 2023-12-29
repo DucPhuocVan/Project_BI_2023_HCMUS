@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: fact_sale_order
+    columns:
+      - name: date_code
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date_code
+      - name: employee_code
+        tests:
+          - relationships:
+              to: ref('dim_employee')
+              field: employee_code
+      - name: territory_code
+        tests:
+          - relationships:
+              to: ref('dim_territory')
+              field: territory_code

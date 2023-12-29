@@ -1,0 +1,8 @@
+.venv
+set_up
+Airflow/logs
+Airflow/config
+Airflow/odbc.ini
+Airflow/odbcinst.ini
+Airflow/plugins
+Airflow/dags/__pycache__

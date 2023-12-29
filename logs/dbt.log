@@ -1,0 +1,54 @@
+
+
+============================== 2023-12-07 15:15:25.268258 | 27afa66c-70ab-49f8-86ce-c5044e38275a ==============================
+[0m15:15:25.268258 [info ] [MainThread]: Running with dbt=1.4.9
+[0m15:15:25.270258 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': 'C:\\Users\\Dell\\.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'project_name': 'dbt-transform', 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m15:15:25.270258 [debug] [MainThread]: Tracking: tracking
+[0m15:15:25.278761 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B95F7CA350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B95F7CA5C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B95F7C9270>]}
+[0m15:15:48.266118 [debug] [MainThread]: Starter project path: E:\Learning\DE\projectBI\.venv\lib\site-packages\dbt\include\starter_project
+[0m15:15:50.416324 [info ] [MainThread]: No sample profile found for sqlserver.
+[0m15:15:50.417324 [info ] [MainThread]: 
+Your new dbt project "dbt_transform" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m15:15:50.418325 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B95F7C8DF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B95F7C8820>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B95F7CA980>]}
+[0m15:15:50.418325 [debug] [MainThread]: Flushing usage events
+
+
+============================== 2023-12-24 03:05:37.893434 | 03876b0c-bf49-4e55-a378-93db5b4607b2 ==============================
+[0m03:05:37.893434 [info ] [MainThread]: Running with dbt=1.4.9
+[0m03:05:37.895322 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': 'C:\\Users\\Dell\\.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'project_name': 'dbt_transform_E', 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m03:05:37.896387 [debug] [MainThread]: Tracking: tracking
+[0m03:05:37.905157 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019DF4B4EB60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019DF4B4F5B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019DF4B4E410>]}
+[0m03:05:37.906764 [debug] [MainThread]: Starter project path: E:\Learning\DE\projectBI\.venv\lib\site-packages\dbt\include\starter_project
+[0m03:05:41.904942 [info ] [MainThread]: No sample profile found for sqlserver.
+[0m03:05:41.904942 [info ] [MainThread]: 
+Your new dbt project "dbt_transform_E" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m03:05:41.905946 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019DF4B4F040>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019DF4B4E410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019DF4B4EB00>]}
+[0m03:05:41.909011 [debug] [MainThread]: Flushing usage events

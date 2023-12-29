@@ -1,0 +1,6 @@
+"BusinessEntityID","PersonType","FirstName","MiddleName","LastName","JobTitle","BirthDate","Gender","HireDate","AddressLine1","City","Territory","Salary"
+"274","SP","Stephen","Y","Jiang","North American Sales Manager","1951-10-17","M","2011-01-04","2427 Notre Dame Ave.","Redmond","Washington","5000"
+"287","SP","Amy","E","Alberts","European Sales Manager","1957-09-20","F","2012-04-16","5009 Orange Street","Renton","Washington","5000"
+"284","SP","Tete","A","Mensa-Annan","Sales Representative","1978-01-05","M","2012-09-30","3997 Via De Luna","Cambridge","Massachusetts","5000"
+"285","SP","Syed","E","Abbas","Pacific Sales Manager","1975-01-11","M","2013-03-14","7484 Roundtree Drive","Bothell","Washington","5000"
+"289","SP","Jae","B","Pak","Sales Representative","1968-03-17","F","2012-05-30","Downshire Way","Cambridge","England","5000"

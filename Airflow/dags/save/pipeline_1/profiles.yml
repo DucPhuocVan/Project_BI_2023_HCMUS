@@ -1,0 +1,17 @@
+pipeline_1:
+  target: dev
+  outputs:
+    dev:
+      type: sqlserver
+      driver: 'ODBC Driver 17 for SQL Server'
+      trust_cert: true
+      # server: '397b14a72228' 
+      # host: localhost
+      host: 'airflow-sqlserver-1'
+      port: 1433
+      database: ProjectBI_Staging
+      schema: dbo
+      username: sa
+      password: password123
+      encrypt: False
+

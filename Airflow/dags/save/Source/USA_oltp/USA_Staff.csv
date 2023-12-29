@@ -1,0 +1,10 @@
+"BusinessEntityID","PersonType","FirstName","MiddleName","LastName","JobTitle","BirthDate","Gender","HireDate","AddressLine1","City","Territory","Salary"
+278,SP,Garrett,R,Vargas,Sales Representative,1975-02-04,M,2011-05-31,"10203 Acorn Avenue",Calgary,Alberta,5000
+281,SP,Shu,K,Ito,Sales Representative,1968-03-09,M,2011-05-31,"5725 Glaze Drive",San Francisco,California,5000
+276,SP,Linda,C,Mitchell,Sales Representative,1980-02-27,F,2011-05-31,"2487 Riverside Drive",Nevada,Utah,5000
+279,SP,Tsvi,Michael,Reiter,Sales Representative,1974-01-18,M,2011-05-31,"8291 Crossbow Way",Memphis,Tennessee,5000
+275,SP,Michael,G,Blythe,Sales Representative,1968-12-25,M,2011-05-31,"8154 Via Mexico",Detroit,Michigan,5000
+280,SP,Pamela,O,Ansman-Wolfe,Sales Representative,1974-12-06,F,2011-05-31,"636 Vine Hill Way",Portland,Oregon,5000
+277,SP,Jillian,,Carson,Sales Representative,1962-08-29,F,2011-05-31,"80 Sunview Terrace",Duluth,Minnesota,5000
+282,SP,José,Edvaldo,Saraiva,Sales Representative,1963-12-11,M,2011-05-31,"9100 Sheppard Avenue North",Ottawa,Ontario,5000
+283,SP,David,R,Campbell,Sales Representative,1974-02-11,M,2011-05-31,"2284 Azalea Avenue",Bellevue,Washington,5000

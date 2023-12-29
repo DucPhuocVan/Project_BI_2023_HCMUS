@@ -1,0 +1,22 @@
+1. Restore database in MSSQL in DBeaver
+    CDM: docker cp E:\Learning\dbt\dbt_practice2\AdventureWorks2012.bak airflow-sqlserver-1:/var/opt/mssql/AdventureWorks2012.bak
+    SQL scripts:
+        RESTORE FILELISTONLY FROM DISK = N'/var/opt/mssql/source.bak';
+
+        RESTORE DATABASE KhacTan FROM DISK = N'/var/opt/mssql/AdventureWorks2012.bak'
+        WITH MOVE 'AdventureWorks2012' TO '/var/opt/mssql/AdventureWorks2012.mdf'
+        , MOVE 'AdventureWorks2012_log' TO '/var/opt/mssql/AdventureWorks2012_log.ldf';
+
+
+pip install apache-airflow-providers-microsoft-mssql
+
+
+docker cp dbt_transform_E airflow-airflow-webserver-1:/opt/airflow/dbt/dbt_transform_E
+
+
+docker cp dbt_transform_E airflow-airflow-webserver-1:/opt/airflow/DBT
+
+docker exec -u root airflow-airflow-webserver-1 chown 777 /opt/airflow/DBT/dbt_transform_E
+
+
+2.

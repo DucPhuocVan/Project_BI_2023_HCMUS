@@ -1,0 +1,35 @@
+version: 2
+sources:
+  - name: sales
+    schema: Sales
+    database: Source
+    tables:
+      - name: SalesOrderHeader
+      - name: SalesOrderDetail
+      - name: Customer
+      - name: CurrencyRate
+      - name: Currency
+      - name: SalesPerson
+      - name: SalesTerritory
+      - name: Store
+
+  - name: person
+    schema: Person
+    database: Source
+    tables:
+      - name: Person
+      - name: CountryRegion
+      - name: PersonPhone
+      - name: EmailAddress
+      - name: BusinessEntityContact
+      - name: BusinessEntityAddress
+      - name: Address
+      - name: StateProvince
+
+  - name: employee
+    schema: HumanResources
+    database: Source
+    tables:
+      - name: Employee
+
+

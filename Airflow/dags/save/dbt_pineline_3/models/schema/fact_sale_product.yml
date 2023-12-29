@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: fact_sale_product
+    columns:
+      - name: date_code
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date_code
+      - name: product_code
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_code
+      - name: territory_code
+        tests:
+          - relationships:
+              to: ref('dim_territory')
+              field: territory_code
+      - name: customer_code
+        tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_code

@@ -5,4 +5,3 @@ Airflow/config
 Airflow/odbc.ini
 Airflow/odbcinst.ini
 Airflow/plugins
-Airflow/dags/__pycache__

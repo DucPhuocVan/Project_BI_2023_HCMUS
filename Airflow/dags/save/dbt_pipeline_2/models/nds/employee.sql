@@ -1,3 +1,8 @@
+{{config(
+    materialized = 'table'
+    , on_schema_change='append_new_columns'
+)}}
+
 WITH cte_usa_employee AS (
     SELECT
         us.BusinessEntityID AS EmployeeID,
@@ -83,6 +88,9 @@ cte_rn AS (
         ROW_NUMBER() OVER(PARTITION BY EmployeeID ORDER BY TerritoryID) AS rn
     FROM cte_merge
 )
-SELECT *
+SELECT DISTINCT *
 FROM cte_rn
 WHERE rn = 1
+-- {% if is_incremental() %}
+--     AND EmployeeID IN (SELECT DISTINCT EmployeeID from {{this}})
+-- {% endif %}

@@ -1,3 +1,8 @@
+{{config(
+    materialized = 'table'
+    , on_schema_change='append_new_columns'
+)}}
+
 WITH cte_usa_product AS (
     SELECT
         ProductID,
@@ -50,6 +55,9 @@ cte_row_number AS (
         ROW_NUMBER() OVER(PARTITION BY ProductID ORDER BY StandardCost) AS rn
     FROM cte_merge
 )
-SELECT *
+SELECT DISTINCT *
 FROM cte_row_number
 WHERE rn = 1
+-- {% if is_incremental() %}
+--     AND ProductID IN (SELECT ProductID FROM {{this}})
+-- {% endif %}

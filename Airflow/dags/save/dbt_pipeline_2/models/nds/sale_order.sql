@@ -1,3 +1,11 @@
+{{config(
+    materialized = 'table'
+    , incremental_strategy = 'merge'
+    , unique_key = 'SalesOrderID'
+    , merge_update_columns = ['OrderDate','DueDate','ShipDate','Status','OnlineOrderFlag','ShipToAddress','TerritoryID']
+    , on_schema_change='append_new_columns'
+)}}
+
 WITH cte_usa_sale_order AS (
     SELECT
         SalesOrderID,
@@ -94,3 +102,6 @@ cte_merge AS (
 )
 SELECT DISTINCT *
 FROM cte_merge
+{% if is_incremental() %}
+    WHERE SalesOrderID IN (SELECT DISTINCT SalesOrderID FROM {{this}})
+{% endif %}

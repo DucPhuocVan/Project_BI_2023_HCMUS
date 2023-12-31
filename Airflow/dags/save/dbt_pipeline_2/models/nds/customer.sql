@@ -1,3 +1,8 @@
+{{config(
+    materialized = 'table'
+    , on_schema_change='append_new_columns'
+)}}
+
 WITH cte_usa_customer AS (
     SELECT
         uc.CustomerID,
@@ -43,3 +48,6 @@ cte_merge AS (
 SELECT DISTINCT 
     *
 FROM cte_merge
+-- {% if is_incremental() %}
+--     WHERE CustomerID IN (SELECT DISTINCT CustomerID FROM {{this}})
+-- {% endif %}

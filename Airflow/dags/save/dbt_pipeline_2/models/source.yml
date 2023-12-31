@@ -2,7 +2,7 @@ version: 2
 sources:
   - name: common
     schema: dbo
-    database: project_BI_staging
+    database: projectBI_Staging
     tables:
       - name: CurrencyRate
       - name: Territory
@@ -10,7 +10,7 @@ sources:
 
   - name: aus
     schema: dbo
-    database: project_BI_staging
+    database: projectBI_Staging
     tables:
       - name: Australia_SalesOrderHeader
       - name: Australia_SalesOrderDetail
@@ -20,7 +20,7 @@ sources:
 
   - name: eur
     schema: dbo
-    database: project_BI_staging
+    database: projectBI_Staging
     tables:
       - name: Europe_SalesOrderHeader
       - name: Europe_SalesOrderDetail
@@ -31,7 +31,7 @@ sources:
 
   - name: usa
     schema: dbo
-    database: project_BI_staging
+    database: projectBI_Staging
     tables:
       - name: USA_SalesOrderHeader
       - name: USA_SalesOrderDetail

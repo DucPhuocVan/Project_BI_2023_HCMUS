@@ -1,3 +1,4 @@
+
 WITH cte_sale_order_detail AS (
     SELECT
         sod.*,

@@ -16,7 +16,7 @@ cte_sale_order_flag AS (
     LEFT JOIN cte_first_customer fc 
         ON so.CustomerID = fc.CustomerID
         AND so.OrderDate = fc.OrderDate
-)
+) 
 SELECT
     so.OrderDate AS date_code,
     so.SalesPersonID AS employee_code,

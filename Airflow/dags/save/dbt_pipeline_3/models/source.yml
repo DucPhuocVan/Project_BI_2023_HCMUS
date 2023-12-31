@@ -1,0 +1,15 @@
+version: 2
+sources:
+  - name: nds
+    schema: dbo
+    database: projectBI_NDS
+    tables:
+      - name: store
+      - name: employee
+      - name: sale_order
+      - name: sale_order_detail
+      - name: product
+      - name: territory
+      - name: customer
+      - name: currency_rate
+

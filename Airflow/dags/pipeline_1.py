@@ -33,7 +33,7 @@ def process_Autralia(engine):
         for file in files:
             print(file)
             if file.endswith(".csv"):
-                filename = os.path.splitext(file)[0]
+                filename = os.path.splitext(file)[0] 
                 filepath = os.path.join(root, file)
                 write_CSV(engine,filename, filepath)
 
@@ -92,10 +92,13 @@ def process_USA(engine):
 
 default_args = {
     'owner': 'Tan',
-    'start_date': datetime(2023, 12, 12)
+    'start_date': datetime(2023, 12, 30),
+    'email':'projectBI@gmail.com',
+    'email_on_failure':True,
+    'schedule_interval':'0 0 * * *'
 }
 
-with DAG('pipeline_1', default_args=default_args, schedule_interval='0 0 * * *') as dag:
+with DAG('pipeline_1', default_args=default_args, catchup=True) as dag:
     START = DummyOperator(task_id='START')
     FINISH = DummyOperator(task_id='FINISH')
 
@@ -103,7 +106,7 @@ with DAG('pipeline_1', default_args=default_args, schedule_interval='0 0 * * *')
     task_id = 'process_other_source',
     bash_command = 'cd /opt/airflow/dags/save/pipeline_1 && dbt run' 
     )
-
+ 
 process_Autralia = PythonOperator(task_id='process_Autralia', 
                                   python_callable=process_Autralia, 
                                   op_args = [engine],

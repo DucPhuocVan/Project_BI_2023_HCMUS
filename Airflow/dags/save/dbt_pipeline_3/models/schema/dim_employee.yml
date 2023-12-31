@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: dim_employee
+    columns:
+      - name: employee_code
+        tests:
+          - unique
+          - not_null

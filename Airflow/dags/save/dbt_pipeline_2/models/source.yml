@@ -1,0 +1,44 @@
+version: 2
+sources:
+  - name: common
+    schema: dbo
+    database: projectBI_Staging
+    tables:
+      - name: CurrencyRate
+      - name: Territory
+      - name: employee_lack
+
+  - name: aus
+    schema: dbo
+    database: projectBI_Staging
+    tables:
+      - name: Australia_SalesOrderHeader
+      - name: Australia_SalesOrderDetail
+      - name: Australia_Customer
+      - name: Australia_Product
+      - name: Australia_Store
+
+  - name: eur
+    schema: dbo
+    database: projectBI_Staging
+    tables:
+      - name: Europe_SalesOrderHeader
+      - name: Europe_SalesOrderDetail
+      - name: Europe_Customer
+      - name: Europe_Product
+      - name: Europe_Store
+      - name: Europe_Employee
+
+  - name: usa
+    schema: dbo
+    database: projectBI_Staging
+    tables:
+      - name: USA_SalesOrderHeader
+      - name: USA_SalesOrderDetail
+      - name: USA_Customer
+      - name: USA_Product
+      - name: USA_Store
+      - name: USA_Staff
+      - name: USA_Person
+
+

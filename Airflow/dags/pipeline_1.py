@@ -12,6 +12,8 @@ from sqlalchemy.orm import sessionmaker
 import pandas as pd
 import openpyxl
 from connect import *
+from pytz import timezone
+
 
 conn_str_sqlalchemy = (
         f"mssql+pyodbc://{username}:{password}@{IPAddress}/{database_staging}?driver={driver}"
@@ -92,36 +94,35 @@ def process_USA(engine):
 
 default_args = {
     'owner': 'Tan',
-    'start_date': datetime(2023, 12, 30),
-    'email':'projectBI@gmail.com',
-    'email_on_failure':True,
-    'schedule_interval':'0 0 * * *'
+    'start_date': datetime(2023, 12, 31, tzinfo=timezone('Asia/Ho_Chi_Minh')),
+    'email':'projectBI@gmail.com', 
+    'email_on_failure':True
 }
 
-with DAG('pipeline_1', default_args=default_args, catchup=True) as dag:
+with DAG('pipeline_1', default_args=default_args, catchup=True, schedule_interval='00 10 * * *') as dag:
     START = DummyOperator(task_id='START')
-    FINISH = DummyOperator(task_id='FINISH')
+    FINISH = DummyOperator(task_id='FINISH_1')
 
     extract_other_source = BashOperator(
     task_id = 'process_other_source',
     bash_command = 'cd /opt/airflow/dags/save/pipeline_1 && dbt run' 
     )
  
-process_Autralia = PythonOperator(task_id='process_Autralia', 
-                                  python_callable=process_Autralia, 
-                                  op_args = [engine],
-                                  dag=dag)
-process_Europe = PythonOperator(task_id='process_Europe', 
-                                 python_callable=process_Europe, 
-                                  op_args = [engine],
-                                 dag=dag)
-process_common = PythonOperator(task_id='process_common', 
-                                   python_callable=process_common, 
-                                  op_args = [engine],
-                                   dag=dag)
-process_USA = PythonOperator(task_id='process_USA', 
-                                   python_callable=process_USA, 
-                                  op_args = [engine],
-                                   dag=dag)
+    process_Autralia = PythonOperator(task_id='process_Autralia', 
+                                    python_callable=process_Autralia, 
+                                    op_args = [engine],
+                                    dag=dag)
+    process_Europe = PythonOperator(task_id='process_Europe', 
+                                    python_callable=process_Europe, 
+                                    op_args = [engine],
+                                    dag=dag)
+    process_common = PythonOperator(task_id='process_common', 
+                                    python_callable=process_common, 
+                                    op_args = [engine],
+                                    dag=dag)
+    process_USA = PythonOperator(task_id='process_USA', 
+                                    python_callable=process_USA, 
+                                    op_args = [engine],
+                                    dag=dag)
 
-START >> process_Autralia>> process_Europe>> process_common>> process_USA>> extract_other_source >> FINISH
+    START >> process_Autralia>> process_Europe>> process_common>> process_USA>> extract_other_source >> FINISH

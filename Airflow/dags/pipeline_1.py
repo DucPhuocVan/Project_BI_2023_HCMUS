@@ -18,18 +18,23 @@ from pytz import timezone
 conn_str_sqlalchemy = (
         f"mssql+pyodbc://{username}:{password}@{IPAddress}/{database_staging}?driver={driver}"
     )
-engine = create_engine(conn_str_sqlalchemy, echo=True)
+engine_staging = create_engine(conn_str_sqlalchemy, echo=True)
 
-def write_CSV(engine, filename, filepath):
+conn_str_sqlalchemy = (
+        f"mssql+pyodbc://{username}:{password}@{IPAddress}/{database_source_USA}?driver={driver}"
+    )
+engine_source_USA = create_engine(conn_str_sqlalchemy, echo=True)
+
+def write_CSV(engine_staging, filename, filepath):
     df = pd.read_csv(filepath)
-    df.to_sql(filename, con=engine, if_exists="replace", index=False)
-def write_XLSX(engine, filename, filepath):
+    df.to_sql(filename, con=engine_staging, if_exists="replace", index=False)
+def write_XLSX(engine_staging, filename, filepath):
     df = pd.read_excel(filepath)
-    df.to_sql(filename, con=engine, if_exists='replace', index=False)
+    df.to_sql(filename, con=engine_staging, if_exists='replace', index=False)
 
 # procesing Australia
 
-def process_Autralia(engine):
+def process_Autralia(engine_staging):
     path_autralia = '/opt/airflow/dags/save/Source/Australia_csv'
     for root, dirs, files in os.walk(path_autralia):
         for file in files:
@@ -37,10 +42,10 @@ def process_Autralia(engine):
             if file.endswith(".csv"):
                 filename = os.path.splitext(file)[0] 
                 filepath = os.path.join(root, file)
-                write_CSV(engine,filename, filepath)
+                write_CSV(engine_staging,filename, filepath)
 
 # processing Europe
-def process_Europe(engine):
+def process_Europe(engine_staging):
     path_Europe = '/opt/airflow/dags/save/Source/Europe_excel/Europe_Sales.xlsx'
     workbook = openpyxl.load_workbook(path_Europe)
 
@@ -66,34 +71,48 @@ def process_Europe(engine):
             if file.endswith(".xlsx") and os.path.splitext(file)[0] != "Europe_Sales":
                 filename = os.path.splitext(file)[0]
                 filepath = os.path.join(root, file)
-                write_XLSX(engine,filename, filepath)
+                write_XLSX(engine_staging,filename, filepath)
 
 # process common
-def process_common(engine):
+def process_common(engine_staging):
     path_common = '/opt/airflow/dags/save/Source/Common'
     for root, dirs, files in os.walk(path_common):
         for file in files:
             if file.endswith(".csv"):
                 filename = os.path.splitext(file)[0]
                 filepath = os.path.join(root, file)
-                write_CSV(engine,filename, filepath)
+                write_CSV(engine_staging,filename, filepath)
             if file.endswith(".xlsx"):
                 filename = os.path.splitext(file)[0]
                 filepath = os.path.join(root, file)
-                write_XLSX(engine,filename, filepath)
+                write_XLSX(engine_staging,filename, filepath)
 
-# processing USA
-def process_USA(engine):
-    path_USA = '/opt/airflow/dags/save/Source/USA_oltp'
-    for root, dirs, files in os.walk(path_USA):
-        for file in files:
-            if file.endswith(".csv"):
-                filename = os.path.splitext(file)[0]
-                filepath = os.path.join(root, file)
-                write_CSV(engine,filename, filepath)
-
+                
+def process_USA(engine_source_USA, engine_staging):
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_Customer'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_Customer', engine_staging, schema='dbo', index=False, if_exists='replace')
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_Person'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_Person', engine_staging, schema='dbo', index=False, if_exists='replace')
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_Product'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_Product', engine_staging, schema='dbo', index=False, if_exists='replace')
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_SalesOrderDetail'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_SalesOrderDetail', engine_staging, schema='dbo', index=False, if_exists='replace')
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_SalesOrderHeader'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_SalesOrderHeader', engine_staging, schema='dbo', index=False, if_exists='replace')
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_Staff'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_Staff', engine_staging, schema='dbo', index=False, if_exists='replace')
+    query = '''SELECT * FROM projectBI_Source_USA.dbo.USA_Store'''
+    df = pd.read_sql(query, engine_source_USA)
+    df.to_sql('USA_Store', engine_staging, schema='dbo', index=False, if_exists='replace')
+                
 default_args = {
-    'owner': 'Tan',
+    'owner': 'Group20',
     'start_date': datetime(2023, 12, 31, tzinfo=timezone('Asia/Ho_Chi_Minh')),
     'email':'projectBI@gmail.com', 
     'email_on_failure':True
@@ -102,27 +121,22 @@ default_args = {
 with DAG('pipeline_1', default_args=default_args, catchup=True, schedule_interval='00 10 * * *') as dag:
     START = DummyOperator(task_id='START')
     FINISH = DummyOperator(task_id='FINISH_1')
-
-    extract_other_source = BashOperator(
-    task_id = 'process_other_source',
-    bash_command = 'cd /opt/airflow/dags/save/pipeline_1 && dbt run' 
-    )
  
     process_Autralia = PythonOperator(task_id='process_Autralia', 
                                     python_callable=process_Autralia, 
-                                    op_args = [engine],
+                                    op_args = [engine_staging],
                                     dag=dag)
     process_Europe = PythonOperator(task_id='process_Europe', 
                                     python_callable=process_Europe, 
-                                    op_args = [engine],
+                                    op_args = [engine_staging],
                                     dag=dag)
     process_common = PythonOperator(task_id='process_common', 
                                     python_callable=process_common, 
-                                    op_args = [engine],
+                                    op_args = [engine_staging],
                                     dag=dag)
     process_USA = PythonOperator(task_id='process_USA', 
                                     python_callable=process_USA, 
-                                    op_args = [engine],
+                                    op_args = [engine_source_USA, engine_staging],
                                     dag=dag)
 
-    START >> process_Autralia>> process_Europe>> process_common>> process_USA>> extract_other_source >> FINISH
+    START >> process_Autralia>> process_Europe>> process_common>> process_USA >> FINISH

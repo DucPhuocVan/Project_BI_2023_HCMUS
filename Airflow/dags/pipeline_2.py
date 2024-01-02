@@ -9,7 +9,7 @@ from pytz import timezone
 import os
 
 default_args = {
-    'owner': 'Tan',
+    'owner': 'Group20',
     'start_date': datetime(2023,12,31, tzinfo=timezone('Asia/Ho_Chi_Minh')),
     'email':'projectBI@gmail.com',
     'email_on_failure':True

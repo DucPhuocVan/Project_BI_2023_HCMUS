@@ -9,13 +9,13 @@ from pytz import timezone
 import os
 
 default_args = {
-    'owner': 'Tan',
+    'owner': 'Group20',
     'start_date': datetime(2023,12,31, tzinfo=timezone('Asia/Ho_Chi_Minh')),
     'email':'projectBI@gmail.com',
     'email_on_failure':True
 }
 
-with DAG('pipeline_3', default_args=default_args, catchup=True, schedule_interval='15 10 * * *') as DAG:
+with DAG('pipeline_3', default_args=default_args, catchup=True, schedule_interval='20 10 * * *') as DAG:
     START = DummyOperator(task_id = 'START')
     FINISH = DummyOperator(task_id = 'FINISH_2')
     pipeline_3 = BashOperator(
@@ -28,7 +28,7 @@ with DAG('pipeline_3', default_args=default_args, catchup=True, schedule_interva
         external_dag_id = 'pipeline_2',
         external_task_id= 'FINISH',
         allowed_states=["success"],
-        execution_delta=timedelta(minutes=5),
+        execution_delta=timedelta(minutes=10),
         failed_states=["failed", "skipped"]
     )
 

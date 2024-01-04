@@ -1,0 +1,24 @@
+select {[Measures].[Revenue],[Measures].[Revenue Offline],
+[Measures].[Revenue Online]} on columns,
+Non Empty [Dim Date].[Year].Members*[Dim Date].[Month].Members on rows
+from [Project BI DW];
+
+
+
+
+
+
+
+
+
+
+
+
+
+select NON EMPTY {[Measures].[Revenue],[Measures].[Revenue Offline],
+[Measures].[Revenue Online]} on columns,
+NON EMPTY {[Dim Territory].[Territory Group].[Territory Group].Members}*{[Dim Territory].[Territory Country].[Territory Country].Members} ON ROWS
+from [Project BI DW];
+
+
+
